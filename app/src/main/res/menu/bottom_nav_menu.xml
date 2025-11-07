@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/notificationSettingsScreen"
+        android:title="@string/settings_tab" />
+
+    <item
+        android:id="@+id/editNotificationScreen"
+        android:title="@string/edit_tab" />
+
+    <item
+        android:id="@+id/userMessagesScreen"
+        android:title="@string/messages_tab" />
+</menu>

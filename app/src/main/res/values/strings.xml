@@ -1,3 +1,56 @@
 <resources>
-    <string name="app_name">StudyProject</string>
+    <string name="app_name">StudyProject_3</string>
+
+    <string name="settings_tab">Настройки</string>
+    <string name="edit_tab">Редактировать</string>
+    <string name="messages_tab">Сообщения</string>
+
+    <string name="messages_screen_title">Сообщения пользователя</string>
+    <string name="message_input_hint">Введите сообщение</string>
+    <string name="send_button">Отправить</string>
+    <string name="reply_from_notification">Ответ из уведомления</string>
+
+    <string name="edit_notification_title">Редактирование уведомления</string>
+    <string name="notification_id_hint">ID уведомления</string>
+    <string name="notification_text_hint">Текст уведомления</string>
+    <string name="update_button">Обновить</string>
+    <string name="cancel_all_button">Отменить все</string>
+    <string name="update_success">Уведомление обновлено</string>
+    <string name="update_error">Уведомление не найдено</string>
+    <string name="cancel_success">Все уведомления отменены</string>
+    <string name="cancel_error">Нет уведомлений для отмены</string>
+
+    <string name="notification_settings_title">Настройки уведомления</string>
+    <string name="notification_title_hint">Заголовок уведомления</string>
+    <string name="notification_message_hint">Текст уведомления (опционально)</string>
+    <string name="expand_notification_switch">Раскрывать уведомление</string>
+    <string name="open_app_switch">Открывать приложение при нажатии</string>
+    <string name="add_reply_switch">Добавить кнопку ответа</string>
+    <string name="priority_label">Приоритет</string>
+    <string name="create_notification_button">Создать уведомление</string>
+    <string name="title_error">Заголовок обязателен</string>
+
+    <string name="priority_high">Высокий</string>
+    <string name="priority_medium">Средний</string>
+    <string name="priority_low">Низкий</string>
+    <string name="priority_min">Минимальный</string>
+
+    <string name="notification_channel_name">Study Project Notifications</string>
+    <string name="notification_channel_description">Channel for study project notifications</string>
+    <string name="reply_button_text">Ответить</string>
+    <string name="reply_input_hint">Введите ответ</string>
+    <string name="notification_created">Уведомление создано! ID: %d</string>
+    <string name="reply_saved">Ответ сохранен: %s</string>
+    <string name="from_notification">Из уведомления: %s</string>
+
+    <string name="updated_notification_title">Обновленное уведомление</string>
+    <string name="notification_id_display">ID созданного уведомления: %d</string>
+    <string name="invalid_id_error">Неверный ID уведомления</string>
+
+    <string name="reply_text">reply_text</string>
+    <string name="notification_id">notification_id</string>
+    <string name="refresh_messages_button">Обновить список сообщений</string>
+
+    <string name="notification_title_key">notification_title</string>
+    <string name="notification_message_key">notification_message</string>
 </resources>
