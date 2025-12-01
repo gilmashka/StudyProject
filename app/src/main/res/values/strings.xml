@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">StudyProject</string>
+    <string name="app_name">StudyProject 4</string>
+    <string name="coroutines_count_slider">Coroutines Count</string>
+    <string name="dispatcher_dropdown">Dispatcher</string>
+    <string name="dispatcher_default">Default</string>
+    <string name="dispatcher_io">IO</string>
+    <string name="dispatcher_main">Main</string>
+    <string name="dispatcher_unconfined">Unconfined</string>
+    <string name="sequential_switch">Sequential</string>
+    <string name="parallel_switch">Parallel</string>
+    <string name="deferred_switch">Deferred Start</string>
+    <string name="start_button">Start Coroutines</string>
+    <string name="toast_exception_message">Long operation failed with Toast Exception</string>
+    <string name="snackbar_exception_message">Long operation failed with Snackbar Exception</string>
+    <string name="reset_exception_message">Settings reset due to exception</string>
+    <string name="loading">Running coroutines…</string>
 </resources>
