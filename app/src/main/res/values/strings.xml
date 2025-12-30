@@ -1,3 +1,55 @@
 <resources>
-    <string name="app_name">StudyProject</string>
+    <string name="app_name">StudyProject_5</string>
+    <!-- Аутентификация -->
+    <string name="error_field_required">Заполните все поля</string>
+    <string name="error_invalid_credentials">Неверные данные</string>
+    <string name="error_user_exists">Пользователь уже существует</string>
+    <string name="success_registration">Регистрация успешна</string>
+    <string name="success_login">Вход выполнен</string>
+
+    <!-- Посты -->
+    <string name="error_title_required">Введите название</string>
+    <string name="error_country_required">Введите страну</string>
+    <string name="error_photo_required">Выберите фото</string>
+    <string name="error_invalid_latitude">Некорректная широта</string>
+    <string name="error_invalid_longitude">Некорректная долгота</string>
+    <string name="success_post_added">Пост добавлен</string>
+    <string name="error_latitude_out_of_range">Широта должна изменяться в пределах [-90, 90] градусов</string>
+    <string name="error_longitude_out_of_range">Долгота должна изменяться в пределах [-180, 180] градусов</string>
+    <string name="unexpected_error">Ошибка: </string>
+
+    <!-- Авторизация-->
+    <string name="username">Имя пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="register">Зарегистрироваться</string>
+
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="cancel">Отмена</string>
+    <string name="error_passwords_not_match">Пароли не совпадают</string>
+
+    <string name="error_not_logged_in">Вы не вошли в систему</string>
+
+    <!--Лента-->
+    <string name="feed">Лента</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="choose_photo">Выбрать фото</string>
+    <string name="sort_by">Сортировка</string>
+    <string name="no_posts">Пока нет постов</string>
+    <string name="all_posts">Все посты</string>
+    <string name="northern_hemisphere">Северное полушарие</string>
+    <string name="southern_hemisphere">Южное полушарие</string>
+
+
+    <!--Добавление поста-->
+    <string name="post_title">Название</string>
+    <string name="post_country">Страна</string>
+    <string name="latitude">Широта</string>
+    <string name="longitude">Долгота</string>
+    <string name="save">Сохранить</string>
+
+    <!--ЛК-->
+    <string name="profile">Профиль</string>
+    <string name="logout">Выйти</string>
+
 </resources>
