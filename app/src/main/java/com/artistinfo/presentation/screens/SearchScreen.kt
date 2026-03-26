@@ -70,7 +70,7 @@ fun SearchScreen(
 
             Spacer(modifier = Modifier.height(60.dp))
 
-            //res-es
+            //res-ts
             when (uiState) {
                 is ArtistUiState.Loading -> {
                     Box(
