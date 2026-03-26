@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">StudyProject</string>
+    <string name="app_name">ArtistInfo</string>
+
+    <!-- SearchScreen-->
+    <string name="main_label_text">Найдите информацию об интересующем вас артисте</string>
+    <string name="placeholder">Имя группы/артиста</string>
+    <string name="nothing_searched">Сожалеем, но ничего не найдено...</string>
+    <string name="not_searched_yet">Здесь будут результаты поиска...</string>
+    
+    <!-- ExpandScreen-->
+    <string name="genre">Жанр</string>
+    <string name="style">Стиль</string>
+    <string name="label">Лейбл</string>
+    <string name="mood">Настрой</string>
+    <string name="formed_year">Дата создания/рождения</string>
+    <string name="dead_year">Дата распада/смерти</string>
+    <string name="website">Ссылка на веб-сайт исполнителя</string>
+    <string name="biography">Биография</string>
 </resources>
+
