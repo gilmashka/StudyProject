@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "StudyProject"
+rootProject.name = "ArtistInfo"
 include(":app")
+ 
