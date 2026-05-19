@@ -1,5 +1,6 @@
 package com.itis.artistinfodagger.data.repositoryImpls
 
+import android.util.Log
 import com.itis.artistinfodagger.api.TheAudioDBApi
 import com.itis.artistinfodagger.data.models.ArtistDto
 import com.itis.artistinfodagger.data.models.TheAudioDBResponse
@@ -13,6 +14,13 @@ class ArtistInfoRepositoryImpl @Inject constructor(
     override suspend fun getSearchRequest(query: String): Result<TheAudioDBResponse> {
         return try {
             val response = api.getSearchRequest(query)
+
+            Log.d("SERVER_RESPONSE", "----------------------------------------")
+            Log.d("SERVER_RESPONSE", "URL ЗАПРОСА: ${response.raw().request.url}")
+            Log.d("SERVER_RESPONSE", "КОД ОТВЕТА СЕРВЕРА: ${response.code()}")
+            Log.d("SERVER_RESPONSE", "ПРИШЛО ЛИ ТЕЛО (BODY): ${response.body()}")
+            Log.d("SERVER_RESPONSE", "ТЕКСТ ОШИБКИ (ERROR BODY): ${response.errorBody()?.string()}")
+            Log.d("SERVER_RESPONSE", "----------------------------------------")
 
             if (response.isSuccessful) {
                 Result.success(value = response.body() ?: TheAudioDBResponse(null))

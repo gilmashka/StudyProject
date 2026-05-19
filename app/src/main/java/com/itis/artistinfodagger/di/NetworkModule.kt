@@ -6,11 +6,11 @@ import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import com.itis.artistinfodagger.api.TheAudioDBApi
 import dagger.Module
 import dagger.Provides
+import okhttp3.Dns
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.security.SecureRandom
-import java.security.cert.X509Certificate
+import java.net.Inet4Address
 import javax.inject.Singleton
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
@@ -44,14 +44,28 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+        return OkHttpClient.Builder()
+            .dns(object : Dns {
+                override fun lookup(hostname: String): List<java.net.InetAddress> {
+                    return Dns.SYSTEM.lookup(hostname)
+                        .filter { it is Inet4Address }
+                        .ifEmpty { Dns.SYSTEM.lookup(hostname) }
+                }
+            })
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                    .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+                    .build()
+                chain.proceed(request)
+            }
+            .build()
     }
 
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.theaudiodb.com/api/v2/json/2b/")
+            .baseUrl("https://www.theaudiodb.com/api/v1/json/2/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
