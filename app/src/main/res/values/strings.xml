@@ -1,20 +1,19 @@
-<resources>
-    <string name="app_name">ArtistInfo</string>
 
-    <!-- SearchScreen-->
-    <string name="main_label_text">Найдите информацию об интересующем вас артисте</string>
-    <string name="placeholder">Имя группы/артиста</string>
-    <string name="nothing_searched">Сожалеем, но ничего не найдено...</string>
-    <string name="not_searched_yet">Здесь будут результаты поиска...</string>
-    
-    <!-- ExpandScreen-->
-    <string name="genre">Жанр</string>
-    <string name="style">Стиль</string>
-    <string name="label">Лейбл</string>
-    <string name="mood">Настрой</string>
-    <string name="formed_year">Дата создания/рождения</string>
-    <string name="dead_year">Дата распада/смерти</string>
-    <string name="website">Ссылка на веб-сайт исполнителя</string>
-    <string name="biography">Биография</string>
-</resources>
+    <resources>
+        <string name="search_title">Поиск артистов</string>
+        <string name="search_placeholder">Введите имя артиста</string>
+        <string name="search_button">Найти</string>
+        <string name="enter_query">Введите запрос</string>
+        <string name="details_title">Детали артиста</string>
+        <string name="retry_button">Повторить</string>
+        <string name="artist_image_description">Фото артиста</string>
+        <string name="artist_thumbnail_description">Превью артиста</string>
+        <string name="unknown_artist">Неизвестный артист</string>
+        <string name="genre_label">Жанр:</string>
+        <string name="style_label">Стиль:</string>
+        <string name="formed_year_label">Год основания:</string>
+        <string name="crash_button">Тестовый краш</string>
+
+        <string name="app_name">ArtistInfo</string>
+    </resources>
 
