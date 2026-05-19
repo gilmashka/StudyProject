@@ -19,33 +19,39 @@ import javax.net.ssl.X509TrustManager
 @Module
 class NetworkModule {
 
+//    @Provides
+//    @Singleton
+//    fun provideOkHttpClient(): OkHttpClient {
+//        return try {
+//            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+//                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {}
+//                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {}
+//                override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+//            })
+//
+//            val sslContext = SSLContext.getInstance("TLS")
+//            sslContext.init(null, trustAllCerts, SecureRandom())
+//
+//            OkHttpClient.Builder()
+//                .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
+//                .hostnameVerifier { _, _ -> true }
+//                .build()
+//        } catch (e: Exception) {
+//            OkHttpClient()
+//        }
+//    }
+
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        return try {
-            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {}
-                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {}
-                override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
-            })
-
-            val sslContext = SSLContext.getInstance("TLS")
-            sslContext.init(null, trustAllCerts, SecureRandom())
-
-            OkHttpClient.Builder()
-                .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
-                .hostnameVerifier { _, _ -> true }
-                .build()
-        } catch (e: Exception) {
-            OkHttpClient()
-        }
+        return OkHttpClient.Builder().build()
     }
 
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.theaudiodb.com/api/v2/json/2/")
+            .baseUrl("https://www.theaudiodb.com/api/v2/json/2b/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

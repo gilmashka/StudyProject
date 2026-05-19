@@ -12,11 +12,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil3.ImageLoader
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.itis.artistinfodagger.presentation.screen.DetailsScreen
 import com.itis.artistinfodagger.presentation.screen.SearchScreen
 import com.itis.artistinfodagger.presentation.viewmodel.DetailsViewModel
 import com.itis.artistinfodagger.presentation.viewmodel.DetailsViewModelFactory
+import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
@@ -29,7 +31,14 @@ class MainActivity : ComponentActivity() {
 
         val appComponent = (application as ArtistInfoDaggerApplication).appComponent
         appComponent.inject(this)
-        val imageLoader = appComponent.getImageLoader()
+
+//        val imageLoader = appComponent.getImageLoader()
+
+        val imageLoader = ImageLoader.Builder(this)
+            .components {
+                add(OkHttpNetworkFetcherFactory(OkHttpClient.Builder().build()))
+            }
+            .build()
 
         setContent {
             AppNavigation(detailsViewModelFactory, imageLoader)
