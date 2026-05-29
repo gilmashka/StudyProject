@@ -55,7 +55,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.core.ktx)
     implementation(libs.androidx.navigation.compose)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -81,4 +80,10 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.messaging)
+
+    //test
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.arch.core.testing)
 }

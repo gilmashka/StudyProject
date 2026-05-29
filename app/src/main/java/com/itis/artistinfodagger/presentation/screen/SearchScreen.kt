@@ -17,6 +17,7 @@ import coil3.ImageLoader
 import coil3.compose.AsyncImage
 import com.itis.artistinfodagger.R
 import com.itis.artistinfodagger.data.models.ArtistDto
+import com.itis.artistinfodagger.presentation.model.ArtistUiModel
 import com.itis.artistinfodagger.presentation.state.SearchScreenState
 import com.itis.artistinfodagger.presentation.viewmodel.SearchViewModel
 
@@ -28,7 +29,6 @@ fun SearchScreen(
     imageLoader: ImageLoader
 ) {
     val state by viewModel.state.collectAsState()
-    var query by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -40,10 +40,8 @@ fun SearchScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            SearchBar(
-                query = query,
-                onQueryChange = { query = it },
-                onSearch = { viewModel.searchArtist(query) }
+            SearchBarSection(
+                onSearch = viewModel::searchArtist
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -59,25 +57,35 @@ fun SearchScreen(
                     )
                     is SearchScreenState.Error -> ErrorContent(
                         message = s.message,
-                        onRetry = { viewModel.searchArtist(query) }
+                        onRetry = { viewModel.retryLastSearch() }
                     )
                 }
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Button(
-                onClick = { throw RuntimeException("Test crash") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error
-                )
-            ) {
-                Text(stringResource(R.string.crash_button))
-            }
+            CrashButton()
         }
+    }
+}
+
+@Composable
+private fun CrashButton() {
+
+    val onClick = remember {
+        { throw RuntimeException("Test Crash") }
+    }
+
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.error
+        )
+    ) {
+        Text(text = stringResource(R.string.crash_button))
     }
 }
 
@@ -154,32 +162,64 @@ fun SearchBar(query: String, onQueryChange: (String) -> Unit, onSearch: () -> Un
 
 @Composable
 fun ArtistList(
-    artists: List<ArtistDto>,
+    artists: List<ArtistUiModel>,
     onClick: (Int) -> Unit,
     imageLoader: ImageLoader
 ) {
     LazyColumn {
-        items(artists) { artist ->
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 4.dp)
-                    .clickable { artist.idArtist?.let(onClick) }
-            ) {
-                Row(modifier = Modifier.padding(12.dp)) {
-                    AsyncImage(
-                        model = artist.strArtistThumb,
-                        contentDescription = stringResource(R.string.artist_thumbnail_description),
-                        imageLoader = imageLoader,
-                        modifier = Modifier.size(60.dp)
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text(
-                        text = artist.strArtist ?: stringResource(R.string.unknown_artist),
-                        modifier = Modifier.align(Alignment.CenterVertically)
-                    )
-                }
-            }
+        items(
+            items = artists,
+            key = { it.id }
+        ) {
+            artist -> ArtistItem(
+                artist = artist,
+                onClick = onClick,
+                imageLoader = imageLoader
+            )
         }
     }
+}
+
+@Composable
+private fun ArtistItem(
+    artist: ArtistUiModel,
+    onClick: (Int) -> Unit,
+    imageLoader: ImageLoader
+){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .clickable { artist.id.let(onClick) }
+    ){
+        Row(
+            modifier = Modifier.padding(12.dp)
+        ){
+            val stableImageLoader = remember(imageLoader) { imageLoader }
+            AsyncImage(
+                model = artist.imageUrl,
+                contentDescription = stringResource(R.string.artist_thumbnail_description),
+                imageLoader = stableImageLoader,
+                modifier = Modifier.size(60.dp)
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                text = artist.name,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+}
+
+@Composable
+fun SearchBarSection(
+    onSearch: (String) -> Unit
+){
+    var query by remember { mutableStateOf("") }
+
+    SearchBar(
+        query = query,
+        onQueryChange = { query = it },
+        onSearch = { onSearch(query) }
+    )
 }

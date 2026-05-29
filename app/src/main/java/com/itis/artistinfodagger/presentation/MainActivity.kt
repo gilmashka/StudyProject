@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -32,7 +33,6 @@ class MainActivity : ComponentActivity() {
         val appComponent = (application as ArtistInfoDaggerApplication).appComponent
         appComponent.inject(this)
 
-//        val imageLoader = appComponent.getImageLoader()
 
         val imageLoader = ImageLoader.Builder(this)
             .components {
@@ -53,8 +53,14 @@ fun AppNavigation(
 ) {
     val navController = rememberNavController()
 
+    val onArtistClick = remember(navController) {
+        { artistId: Int ->
+            navController.navigate("details/$artistId")
+        }
+    }
+
     val appComponent = (LocalContext.current.applicationContext as ArtistInfoDaggerApplication).appComponent
-    val searchViewModel = appComponent.getSearchViewModel()
+    val searchViewModel =  remember { appComponent.getSearchViewModel() }
 
     LaunchedEffect(navController) {
         navController.currentBackStackEntryFlow.collect { entry ->
@@ -68,9 +74,7 @@ fun AppNavigation(
         composable("search") {
             SearchScreen(
                 viewModel = searchViewModel,
-                onArtistClick = { artistId ->
-                    navController.navigate("details/$artistId")
-                },
+                onArtistClick = onArtistClick,
                 imageLoader = imageLoader
             )
         }
@@ -79,11 +83,14 @@ fun AppNavigation(
             arguments = listOf(navArgument("artistId") { type = NavType.IntType })
         ) { backStackEntry ->
             val artistId = backStackEntry.arguments?.getInt("artistId") ?: return@composable
-            val detailsViewModel = detailsViewModelFactory.create(artistId)
+            val detailsViewModel = remember(artistId) {
+                detailsViewModelFactory.create(artistId)
+            }
 
             DetailsScreen(
                 viewModel = detailsViewModel,
-                imageLoader = imageLoader)
+                imageLoader = imageLoader
+            )
         }
     }
 }

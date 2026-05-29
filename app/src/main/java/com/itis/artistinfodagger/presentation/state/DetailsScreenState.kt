@@ -1,13 +1,13 @@
 package com.itis.artistinfodagger.presentation.state
 
-import com.itis.artistinfodagger.data.models.ArtistDto
+import com.itis.artistinfodagger.presentation.model.ArtistUiModel
 
 sealed class DetailsScreenState {
 
     data object Loading: DetailsScreenState()
 
     data class Success(
-        val artist: ArtistDto
+        val artist: ArtistUiModel
     ): DetailsScreenState()
 
     data class Error(
