@@ -1,10 +1,9 @@
 package com.itis.artistinfodagger.data.models
 
 import com.google.gson.annotations.SerializedName
-
 data class ArtistDto(
     @SerializedName("idArtist")
-    val idArtist: Int?,
+    val idArtist: Int,
 
     @SerializedName("strArtist")
     val strArtist: String?,
