@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ArtistInfo"
+rootProject.name = "ArtistInfoDagger"
 include(":app")
  
