@@ -1,6 +1,6 @@
 package com.itis.artistinfodagger.presentation.state
 
-import com.itis.artistinfodagger.data.models.ArtistDto
+import com.itis.artistinfodagger.presentation.model.ArtistUiModel
 
 sealed class SearchScreenState {
 
@@ -9,7 +9,7 @@ sealed class SearchScreenState {
     data object Loading: SearchScreenState()
 
     data class Success(
-        val artists: List<ArtistDto>
+        val artists: List<ArtistUiModel>
     ): SearchScreenState()
 
     data class Error(

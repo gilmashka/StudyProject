@@ -15,6 +15,7 @@ import coil3.ImageLoader
 import coil3.compose.AsyncImage
 import com.itis.artistinfodagger.R
 import com.itis.artistinfodagger.data.models.ArtistDto
+import com.itis.artistinfodagger.presentation.model.ArtistUiModel
 import com.itis.artistinfodagger.presentation.state.DetailsScreenState
 import com.itis.artistinfodagger.presentation.viewmodel.DetailsViewModel
 
@@ -82,7 +83,7 @@ private fun ErrorContent(message: String, onRetry: () -> Unit) {
 
 @Composable
 fun ArtistDetails(
-    artist: ArtistDto,
+    artist: ArtistUiModel,
     imageLoader: ImageLoader
 ) {
     Column(
@@ -90,10 +91,15 @@ fun ArtistDetails(
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
+        val imageUrl = remember(artist.bannerUrl, artist.imageUrl){
+            artist.bannerUrl ?: artist.imageUrl
+        }
+
+        val stableImageLoader = remember(imageLoader) { imageLoader }
         AsyncImage(
-            model = artist.strArtistBanner ?: artist.strArtistThumb,
+            model = imageUrl,
             contentDescription = stringResource(R.string.artist_image_description),
-            imageLoader = imageLoader,
+            imageLoader = stableImageLoader,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
@@ -102,28 +108,26 @@ fun ArtistDetails(
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = artist.strArtist ?: stringResource(R.string.unknown_artist),
+            text = artist.name ?: stringResource(R.string.unknown_artist),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        artist.strGenre?.let {
+        artist.genre?.let {
             DetailRow(label = stringResource(R.string.genre_label), value = it)
         }
-
-        artist.strStyle?.let {
+        artist.style?.let {
             DetailRow(label = stringResource(R.string.style_label), value = it)
         }
-
-        artist.intFormedYear?.let {
+        artist.formedYear?.let {
             DetailRow(label = stringResource(R.string.formed_year_label), value = it.toString())
         }
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        artist.strBiography?.let {
+        artist.biography?.let {
             Text(
                 text = it,
                 style = MaterialTheme.typography.bodyLarge
@@ -133,7 +137,10 @@ fun ArtistDetails(
 }
 
 @Composable
-private fun DetailRow(label: String, value: String) {
+private fun DetailRow(
+    label: String,
+    value: String
+) {
     Row(
         modifier = Modifier.padding(vertical = 4.dp)
     ) {
